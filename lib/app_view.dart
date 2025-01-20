@@ -10,14 +10,15 @@ class MyAppView extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Daftry",
       theme: ThemeData(
-          colorScheme: ColorScheme.light(
-        surface: Colors.grey.shade100,
-        onSurface: Colors.black,
-        primary: Color(0xFF009AE7),
-        secondary: Color(0xffe064f7),
-        tertiary: Color(0xffff8d6c),
-        outline: Colors.grey.shade500,
-      )),
+        colorScheme: ColorScheme.light(
+          surface: Colors.grey.shade100,
+          onSurface: Colors.black,
+          primary: Color(0xFF009AE7),
+          secondary: Color(0xffe064f7),
+          tertiary: Color(0xffff8d6c),
+          outline: Colors.grey.shade500,
+        ),
+      ),
       home: HomeScreen(),
     );
   }

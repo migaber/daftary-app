@@ -50,12 +50,12 @@ class _HomeScreenState extends State<HomeScreen> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: LinearGradient(
-                transform: const GradientRotation(pi / 4),
+                transform: const GradientRotation(0.5 * pi),
                 colors: [
-                  Theme.of(context).colorScheme.tertiary,
-                  Theme.of(context).colorScheme.secondary,
                   Theme.of(context).colorScheme.primary,
+                  Theme.of(context).colorScheme.secondary,
                 ],
+                begin: Alignment.topLeft,
               ),
             ),
             child: Icon(CupertinoIcons.add)),

@@ -24,12 +24,13 @@ class HomePageCreditcard extends StatelessWidget {
           ),
         ],
         gradient: LinearGradient(
-          transform: const GradientRotation(pi / 4),
+          transform: const GradientRotation(0.6 * pi),
           colors: [
-            Theme.of(context).colorScheme.primary,
             Theme.of(context).colorScheme.secondary,
-            Theme.of(context).colorScheme.tertiary,
+            Theme.of(context).colorScheme.primary,
           ],
+          begin: Alignment.bottomRight,
+          end: Alignment.bottomLeft,
         ),
       ),
       child: Padding(

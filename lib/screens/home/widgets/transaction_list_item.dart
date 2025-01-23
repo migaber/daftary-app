@@ -29,21 +29,13 @@ class TransactionListItem extends StatelessWidget {
                   Stack(
                     alignment: Alignment.center,
                     children: [
-                      Container(
-                        height: 30,
-                        width: 30,
-                        decoration: BoxDecoration(
-                          color: transaction['isExpense']
-                              ? Theme.of(context).colorScheme.tertiary
-                              : Theme.of(context).colorScheme.primary,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
                       Icon(
                         transaction['isExpense']
-                            ? CupertinoIcons.minus_circled
-                            : CupertinoIcons.add_circled,
-                        color: Colors.white,
+                            ? CupertinoIcons.minus_circle_fill
+                            : CupertinoIcons.add_circled_solid,
+                        color: transaction['isExpense']
+                            ? Theme.of(context).colorScheme.secondary
+                            : Theme.of(context).colorScheme.primary,
                       )
                     ],
                   ),

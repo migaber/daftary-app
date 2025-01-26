@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "924812371955",
+    "project_id": "g2winz-daftary",
+    "storage_bucket": "g2winz-daftary.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924812371955:android:226e959c6448b2c3535486",
+        "android_client_info": {
+          "package_name": "com.g2winz.daftary"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcxctqFhltXi_qoVtHNxcAUCVCrKlhsVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

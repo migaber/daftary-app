@@ -1,0 +1,12 @@
+name: expense_repository
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  firebase_auth: ^5.4.1
+  cloud_firestore: ^5.6.2

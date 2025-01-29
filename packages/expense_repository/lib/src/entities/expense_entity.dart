@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class ExpenseEntity {
   String expenseId;
   double amount;
@@ -13,6 +15,7 @@ class ExpenseEntity {
 
   Map<String, Object?> toDocument() {
     return {
+      'expenseId': expenseId,
       'amount': amount,
       'description': description,
       'date': date,
@@ -21,10 +24,10 @@ class ExpenseEntity {
 
   static ExpenseEntity fromDocument(Map<String, dynamic> doc) {
     return ExpenseEntity(
+      expenseId: doc['expenseId'],
       amount: doc['amount'],
       description: doc['description'],
-      date: doc['date'],
-      expenseId: doc['expenseId'],
+      date: (doc['date'] as Timestamp).toDate(),
     );
   }
 }

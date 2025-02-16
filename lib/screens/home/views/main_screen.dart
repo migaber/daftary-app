@@ -1,11 +1,12 @@
-import 'package:daftary/data/data.dart';
 import 'package:daftary/screens/home/widgets/home_page_creditcard.dart';
 import 'package:daftary/screens/home/widgets/transaction_list_item.dart';
+import 'package:expense_repository/expense_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+  final List<Expense> expenses;
+  const MainScreen(this.expenses, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -101,9 +102,9 @@ class MainScreen extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-                itemCount: dummyTransactions.length,
+                itemCount: expenses.length,
                 itemBuilder: (context, int i) {
-                  final transaction = dummyTransactions[i];
+                  final transaction = expenses[i];
                   return TransactionListItem(transaction: transaction);
                 }),
           )

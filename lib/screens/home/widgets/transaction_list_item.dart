@@ -1,3 +1,4 @@
+import 'package:expense_repository/expense_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -8,7 +9,7 @@ class TransactionListItem extends StatelessWidget {
     required this.transaction,
   });
 
-  final Map<String, dynamic> transaction;
+  final Expense transaction;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +31,10 @@ class TransactionListItem extends StatelessWidget {
                     alignment: Alignment.center,
                     children: [
                       Icon(
-                        transaction['isExpense']
+                        transaction.isExpense
                             ? CupertinoIcons.minus_circle_fill
                             : CupertinoIcons.add_circled_solid,
-                        color: transaction['isExpense']
+                        color: transaction.isExpense
                             ? Theme.of(context).colorScheme.secondary
                             : Theme.of(context).colorScheme.primary,
                       )
@@ -43,7 +44,7 @@ class TransactionListItem extends StatelessWidget {
                     width: 12,
                   ),
                   Text(
-                    transaction['description'],
+                    transaction.description,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
@@ -55,7 +56,7 @@ class TransactionListItem extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    "${transaction['isExpense'] ? '-' : ''}${transaction['amount']} LE",
+                    "${transaction.isExpense ? '-' : ''}${transaction.amount} LE",
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
@@ -64,7 +65,7 @@ class TransactionListItem extends StatelessWidget {
                   ),
                   Text(
                     DateFormat.yMMMd().format(
-                      transaction['date'],
+                      transaction.date,
                     ),
                     style: TextStyle(
                       fontSize: 10,

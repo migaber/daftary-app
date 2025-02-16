@@ -15,7 +15,6 @@ class CreateExpenseBloc extends Bloc<CreateExpenseEvent, CreateExpenseState> {
         await expenseRepository.createExpense(event.expense);
         emit(CreateExpenseSuccess());
       } catch (e) {
-        print("Error writing to Firestore: $e");
         emit(CreateExpenseFailure());
       }
     });

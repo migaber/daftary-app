@@ -151,6 +151,7 @@ class _AddExpenseState extends State<AddExpense> {
                             expense.date =
                                 DateTime.tryParse(dateController.text) ??
                                     DateTime.now();
+                            expense.isExpense = true;
                             context
                                 .read<CreateExpenseBloc>()
                                 .add(CreateExpense(expense));

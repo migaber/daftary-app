@@ -1,3 +1,4 @@
+import 'package:daftary/screens/auth/blocs/auth_bloc/auth_bloc.dart';
 import 'package:daftary/screens/home/blocs/get_expenses_bloc/get_expenses_bloc_bloc.dart';
 import 'package:daftary/screens/home/views/home_screen.dart';
 import 'package:expense_repository/expense_repository.dart';
@@ -24,8 +25,21 @@ class MyAppView extends StatelessWidget {
       ),
       home: BlocProvider(
         create: (context) =>
-            GetExpensesBloc(FirebaseExpenseRepo())..add(GetExpenses()),
-        child: HomeScreen(),
+            GetExpensesBloc(SupabaseExpenseRepo())..add(GetExpenses()),
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('Daftary'),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.logout),
+                onPressed: () {
+                  context.read<AuthBloc>().add(SignOutRequested());
+                },
+              ),
+            ],
+          ),
+          body: HomeScreen(),
+        ),
       ),
     );
   }

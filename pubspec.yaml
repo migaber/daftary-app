@@ -10,16 +10,21 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
+  supabase_flutter: ^2.3.4
+  bloc: ^8.1.3
+  flutter_bloc: ^8.1.4
   intl: ^0.20.1
   font_awesome_flutter: ^10.8.0
-
-  expense_repository:
-    path: packages/expense_repository
-  bloc: ^9.0.0
-  flutter_bloc: ^9.0.0
-  firebase_core: ^3.10.1
   equatable: ^2.0.7
   uuid: ^4.5.1
+  instabug_flutter: ^14.1.0
+  flutter_dotenv: ^5.1.0
+
+  # Local packages
+  expense_repository:
+    path: packages/expense_repository
+  auth_repository:
+    path: packages/auth_repository
 
 dev_dependencies:
   flutter_test:
@@ -28,3 +33,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - .env

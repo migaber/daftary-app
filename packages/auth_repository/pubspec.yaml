@@ -1,5 +1,5 @@
-name: expense_repository
-description: A repository that handles expense related requests.
+name: auth_repository
+description: A repository that handles authentication requests.
 version: 0.1.0
 publish_to: none
 

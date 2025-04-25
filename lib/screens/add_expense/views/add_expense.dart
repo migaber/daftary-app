@@ -28,6 +28,22 @@ class _AddExpenseState extends State<AddExpense> {
     super.initState();
   }
 
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Error'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<CreateExpenseBloc, CreateExpenseState>(
@@ -35,7 +51,10 @@ class _AddExpenseState extends State<AddExpense> {
         if (state is CreateExpenseSuccess) {
           Navigator.pop(context);
         } else if (state is CreateExpenseLoading) {
-          isLoading = true;
+          setState(() => isLoading = true);
+        } else if (state is CreateExpenseFailure) {
+          setState(() => isLoading = false);
+          _showErrorDialog(state.error);
         }
       },
       child: GestureDetector(
@@ -143,14 +162,21 @@ class _AddExpenseState extends State<AddExpense> {
                             foregroundColor: Colors.white,
                           ),
                           onPressed: () {
+                            if (amountController.text.isEmpty) {
+                              _showErrorDialog('Please enter an amount');
+                              return;
+                            }
+                            if (descrtionController.text.isEmpty) {
+                              _showErrorDialog('Please enter a description');
+                              return;
+                            }
+
                             Expense expense = Expense.empty;
                             expense.expenseId = const Uuid().v1();
                             expense.description = descrtionController.text;
                             expense.amount =
                                 double.tryParse(amountController.text) ?? 0;
-                            expense.date =
-                                DateTime.tryParse(dateController.text) ??
-                                    DateTime.now();
+                            expense.date = selectedDate;
                             expense.isExpense = true;
                             context
                                 .read<CreateExpenseBloc>()

@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       providers: [
                         BlocProvider(
                             create: (context) =>
-                                CreateExpenseBloc(FirebaseExpenseRepo()))
+                                CreateExpenseBloc(SupabaseExpenseRepo()))
                       ],
                       child: AddExpense(),
                     ),

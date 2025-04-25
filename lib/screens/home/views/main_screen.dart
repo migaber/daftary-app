@@ -3,10 +3,15 @@ import 'package:daftary/screens/home/widgets/transaction_list_item.dart';
 import 'package:expense_repository/expense_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:daftary/screens/home/blocs/get_expenses_bloc/get_expenses_bloc_bloc.dart';
+import 'package:daftary/screens/home/blocs/delete_expense_bloc/delete_expense_bloc.dart';
 
 class MainScreen extends StatelessWidget {
   final List<Expense> expenses;
-  const MainScreen(this.expenses, {super.key});
+  final ExpenseRepository expenseRepo;
+
+  const MainScreen(this.expenses, {required this.expenseRepo, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -84,29 +89,70 @@ class MainScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              GestureDetector(
-                onTap: () {},
-                child: Text(
-                  "View All",
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Theme.of(context).colorScheme.outline,
-                    fontWeight: FontWeight.w600,
+              if (expenses.isNotEmpty)
+                GestureDetector(
+                  onTap: () {},
+                  child: Text(
+                    "View All",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context).colorScheme.outline,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
           SizedBox(
             height: 16,
           ),
           Expanded(
-            child: ListView.builder(
-                itemCount: expenses.length,
-                itemBuilder: (context, int i) {
-                  final transaction = expenses[i];
-                  return TransactionListItem(transaction: transaction);
-                }),
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider.value(
+                  value: context.read<GetExpensesBloc>(),
+                ),
+                BlocProvider(
+                  create: (context) => DeleteExpenseBloc(expenseRepo),
+                ),
+              ],
+              child: expenses.isEmpty
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            CupertinoIcons.money_dollar_circle,
+                            size: 64,
+                            color: Theme.of(context).colorScheme.outline,
+                          ),
+                          SizedBox(height: 16),
+                          Text(
+                            "No expenses yet",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Theme.of(context).colorScheme.outline,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            "Add your first expense by tapping the + button",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).colorScheme.outline,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: expenses.length,
+                      itemBuilder: (context, int i) {
+                        final transaction = expenses[i];
+                        return TransactionListItem(transaction: transaction);
+                      }),
+            ),
           )
         ]),
       ),

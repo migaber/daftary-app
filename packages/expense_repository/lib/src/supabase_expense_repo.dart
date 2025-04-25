@@ -69,4 +69,13 @@ class SupabaseExpenseRepo implements ExpenseRepository {
       throw Exception('An unexpected error occurred: $e');
     }
   }
+
+  @override
+  Future<void> deleteExpense(String expenseId) async {
+    try {
+      await supabase.from(tableName).delete().eq('expense_id', expenseId);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

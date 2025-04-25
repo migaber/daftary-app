@@ -1,4 +1,5 @@
 import 'package:daftary/screens/add_expense/blocs/create_expense_bloc/create_expense_bloc.dart';
+import 'package:daftary/screens/home/blocs/get_expenses_bloc/get_expenses_bloc_bloc.dart';
 import 'package:expense_repository/expense_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +50,7 @@ class _AddExpenseState extends State<AddExpense> {
     return BlocListener<CreateExpenseBloc, CreateExpenseState>(
       listener: (context, state) {
         if (state is CreateExpenseSuccess) {
+          context.read<GetExpensesBloc>().add(GetExpenses());
           Navigator.pop(context);
         } else if (state is CreateExpenseLoading) {
           setState(() => isLoading = true);
